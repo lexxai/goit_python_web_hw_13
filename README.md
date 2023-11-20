@@ -49,8 +49,25 @@ GoIT, Python WEB, Homework number 12. FastAPI. PostgreSQL. Docker. REST API. ORM
 - .env  (визначає APP_ENV що визначає поточний робочий файл є prod, dev)
 - .env-dev (Налаштування для dev)
 - .env-prod (Налаштування для prod)
+### Режим Docker prod
+#### Docker app compose
+Виконати скрипт:
+```
+cd .\scripts
+docker_run_docker-compose.cmd
+```
+або
+```
+docker-compose --env-file .env-prod up -d 
+```
+![](doc/docker-app-02.png)
+![](doc/docker-app-01.png)
+![](doc/healthcheck-01.png)
 
-### Бази данних Docker compose
+#### Docker Hub url: https://hub.docker.com/r/lexxai/web_hw13
+
+### Режим dev
+#### Бази данних Docker compose
 Виконати скрипт:
 ```
 cd .\scripts
@@ -63,7 +80,7 @@ cd .\hw13
 alembic upgrade head 
 ```
 
-### FastAPI server
+#### FastAPI server
 Виконати скрипт:
 ```
 cd .\scripts
@@ -79,6 +96,8 @@ uvicorn main:app --reload --port 9000
 cd .\hw13
 python .\main.py
 ```
+
+
 ### Відкрити сторінку браузера http://localhost:9000
 ![](doc/index-01.png)
 FastAPI - Swagger UI
@@ -164,5 +183,7 @@ Updated link of avatar from Cloudinary on user profile
 Проєкт виконнано за цим посиланням:
 
 https://github.com/lexxai/goit_python_web_hw_10/tree/addon-hw13
+
+(prepend) Django - https://github.com/lexxai/goit_python_web_django_lect_02_notes
 
 

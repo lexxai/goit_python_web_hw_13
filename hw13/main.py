@@ -77,7 +77,7 @@ def healthchecker(db: Session = Depends(get_db)):
         result = db.execute(text("SELECT 1")).fetchone()
         if result is None:
             raise HTTPException(status_code=500, detail="Database is not configured correctly")
-        return {"message": "Welcome to FastAPI on Howe Work 11!"}
+        return {"message": f"Welcome to FastAPI on Howe Work 13 APP: {settings.app_name.upper()}!"}
     except Exception as e:
         print(e)
         raise HTTPException(

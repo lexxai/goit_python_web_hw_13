@@ -1,7 +1,7 @@
 @echo off
 PUSHD ..
 
-docker-compose up -d code --build
+docker-compose --env-file .env-prod up -d code --build
 timeout 1
 docker attach web_hw13-code-1
 
