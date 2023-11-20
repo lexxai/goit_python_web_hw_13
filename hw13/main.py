@@ -12,7 +12,7 @@ from sqlalchemy.orm import Session
 
 from src.conf.config import settings
 from src.database.db import get_db
-from src.routes import contacts, auth
+from src.routes import contacts, auth, users
 
 
 
@@ -61,6 +61,7 @@ def healthchecker(db: Session = Depends(get_db)):
     
 app.include_router(contacts.router, prefix="/api")
 app.include_router(auth.router, prefix="/api/auth")
+app.include_router(users.router, prefix="/api")
 
 
 if __name__ == "__main__":
