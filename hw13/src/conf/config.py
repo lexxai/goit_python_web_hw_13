@@ -7,9 +7,10 @@ from pydantic_settings import BaseSettings
 BASE_PATH = Path(__file__).resolve().parent.parent.parent.parent
 load_dotenv(BASE_PATH.joinpath(".env"))
 APP_ENV = environ.get("APP_ENV")
-#print(APP_ENV)
+# print(APP_ENV)
 
 # SQLALCHEMY_DATABASE_URL=postgresql+psycopg2://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}
+
 
 class Settings(BaseSettings):
     app_name: str = "contacts"
@@ -26,7 +27,7 @@ class Settings(BaseSettings):
     mail_from_name: str = ""
     redis_host: str = "localhost"
     redis_port: int = 6379
-    cloudinary_name: str  = "some_name"
+    cloudinary_name: str = "some_name"
     cloudinary_api_key: str = "0000000000000"
     cloudinary_api_secret: str = "some_secret"
 
