@@ -76,7 +76,11 @@ async def send_data_to_api() -> None:
                 headers=headers,
                 data=json.dumps(data),
             )
-            if result.status != 201:
+            if result.status == 429:
+                print(f"ERROR: {result.status=}, sleep")
+                await asyncio.sleep(6)
+                print()
+            elif result.status != 201:
                 print(
                     f"ERROR: {result.status=}, Try set token. Get token link "
                     f"http://{settings.app_host}:{settings.app_port}/api/auth/login"

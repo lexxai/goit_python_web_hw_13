@@ -62,3 +62,36 @@ GoIT, Python WEB, Homework number 12. FastAPI. PostgreSQL. Docker. REST API. ORM
 
 Спроба зайти, після підтвердження пошти
 ![](doc/auth-emailconf-06.png)
+
+
+## 1.2. 
+
+### Обмежуйте кількість запитів до своїх маршрутів контактів. 
+Postman 
+![](doc/limit-contacts-01.png)
+
+### Обмеження швидкісті - створення контактів для користувача
+Postman 
+![](doc/limit-create-02.png)
+
+seed script
+![](doc/limit-create-01.png)
+
+
+## 1.3. CORS
+CORS ORGIGIN ALLOW http://localhost:3001
+![](doc/cors-03.png)
+
+CORS ORGIGIN DENY FOR http://localhost:3002
+![](doc/cors-01.png)
+
+CORS ORGIGIN DENY FOR http://localhost:3002
+![](doc/cors-02.png)
+
+CORS ORGIGIN ALLOW http://localhost:3002
+![](doc/cors-04.png)
+
+CORS ORGIGIN ALLOWED FOR http://localhost:3002
+![](doc/cors-05.png)
+
+
