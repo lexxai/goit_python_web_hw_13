@@ -88,6 +88,7 @@ async def send_data_to_api() -> None:
                 break
         except aiohttp.ClientOSError as err:
             print(f"Connection error: {str(err)}")
+            break
     await session.close()
     print("Done")
 

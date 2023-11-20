@@ -1,7 +1,7 @@
 @echo off
 PUSHD ..
 
-docker-compose up -d code 
+docker-compose --env-file .env-prod up -d code 
 
 
 POPD
