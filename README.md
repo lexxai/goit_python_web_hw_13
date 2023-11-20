@@ -43,6 +43,37 @@ GoIT, Python WEB, Homework number 12. FastAPI. PostgreSQL. Docker. REST API. ORM
 
 # Результати виконання завдвнь
 
+## Встановлення та запуск
+### Бази данних Docker compose
+Виконати скрипт:
+```
+cd .\scripts
+docker_run_db_compose.cmd
+```
+або
+```
+docker compose  --env-file .env-prod --file docker-compose-db.yml  up -d 
+cd .\hw13
+alembic upgrade head 
+```
+
+### FastAPI server
+Виконати скрипт:
+```
+cd .\scripts
+runserver.cmd
+```
+або
+```
+cd .\hw13
+uvicorn main:app --reload --port 9000
+```
+або
+```
+cd .\hw13
+python .\main.py
+```
+
 ## 1.1. Реалізуйте механізм верифікації електронної пошти зареєстрованого користувача
 
 Реєстрація
