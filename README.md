@@ -80,6 +80,13 @@ cd .\hw13
 python .\main.py
 ```
 ### Відкрити сторінку браузера http://localhost:9000
+![](doc/index-01.png)
+FastAPI - Swagger UI
+![](doc/index-02.png)
+JavaScript easy client
+![](doc/index-03.png)
+
+## Етапи виконнаня 
 
 ## 1.1. Реалізуйте механізм верифікації електронної пошти зареєстрованого користувача
 
@@ -131,5 +138,8 @@ CORS ORGIGIN ALLOW http://localhost:3002
 
 CORS ORGIGIN ALLOWED FOR http://localhost:3002
 ![](doc/cors-05.png)
+
+
+## 1.4. Avatar Cloudinary
 
 

@@ -67,7 +67,7 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
 async def main(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "tilte": "HW12 APP"})
+    return templates.TemplateResponse("index.html", {"request": request, "tilte": f"HW13 APP {settings.app_name.upper()}"})
 
 
 @app.get("/api/healthchecker")
