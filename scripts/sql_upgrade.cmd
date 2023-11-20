@@ -1,7 +1,7 @@
 @echo off
-PUSHD ..
+PUSHD ..\hw13
 
-alembic revision --autogenerate -m "Updates"
+rem alembic revision --autogenerate -m "Updates"
 alembic upgrade head 
 
 POPD

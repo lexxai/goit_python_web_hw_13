@@ -25,3 +25,8 @@ class UserResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class UserDetailResponse(BaseModel):           
+    detail: str
+    user: UserResponse
