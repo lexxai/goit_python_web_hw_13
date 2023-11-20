@@ -26,7 +26,7 @@ except ImportError:
     from conf.config import settings
 
 
-ACCESS_TOKEN = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZXh4YWllZHVAbWV0YS51YSIsImlhdCI6MTcwMDUwNDcxMiwiZXhwIjoxNzAwNTA1NjEyLCJzY29wZSI6ImFjY2Vzc190b2tlbiJ9.xiG_AM_pgb1-LkdPKz2VQQ2evf3fxPL7BqUZ8kJvimwS31PTkz2kE_3XoTejd37BOtbKWTWEIwbfn4VBTrEsww"
+ACCESS_TOKEN = ""
 
 NUMBER_CONTACTS = 10
 
