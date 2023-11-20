@@ -1,11 +1,14 @@
+import logging
 from sqlalchemy.orm import Session
 
 
+from src.conf.config import settings
 from src.database.models import User
 from src.services.auth.auth import auth_service
 from src.repository import users as repository_users
 
 
+logger = logging.getLogger(f"{settings.app_name}.{__name__}")
 
 
 async def a_get_current_user(token: str | None, db: Session) -> User | None:
@@ -14,13 +17,17 @@ async def a_get_current_user(token: str | None, db: Session) -> User | None:
     email = auth_service.decode_jwt(token)
     if email is None:
         return None
-    user = await repository_users.get_user_by_email(email, db)
+    user = await repository_users.get_cache_user_by_email(email)
+    if user is None:
+        user = await repository_users.get_user_by_email(email, db)
+        if user:
+            await repository_users.update_cache_user(user)
+
     return user
 
 
 async def signup(body, db: Session):
     try:
-        user = await repository_users.get_user_by_name(body.username, db)
         user = await repository_users.get_user_by_name(body.username, db)
         if user is not None:
             return None
@@ -33,8 +40,7 @@ async def signup(body, db: Session):
     return new_user
 
 
-async def login(username: str, password: str, db: Session):
-    user = await repository_users.get_user_by_name(username, db)
+def login(user: User, password: str, db: Session):
     if user is None:
         return None
     if not auth_service.verify_password(password, user.password):
@@ -42,7 +48,7 @@ async def login(username: str, password: str, db: Session):
     # Generate JWT
     access_token, expire_token = auth_service.create_access_token(data={"sub": user.email})
     token = {"access_token": access_token, "token_type": "bearer", "expire_access_token": expire_token}
-    refresh_token, expire_token = auth_service.create_refresh_token(data={"sub": str(user.email)})
+    refresh_token, expire_token = auth_service.create_refresh_token(data={"sub": user.email})
     token.update({"refresh_token": refresh_token, "expire_refresh_token": expire_token})
     return token
 

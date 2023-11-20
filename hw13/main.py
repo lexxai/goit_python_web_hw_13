@@ -1,4 +1,6 @@
+import logging
 import time
+import colorlog
 from fastapi import FastAPI, Path, Query, Depends, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -13,6 +15,13 @@ from sqlalchemy.orm import Session
 from src.conf.config import settings
 from src.database.db import get_db
 from src.routes import contacts, auth, users
+
+logger = logging.getLogger(f"{settings.app_name}")
+logger.setLevel(logging.INFO)
+handler = colorlog.StreamHandler()
+handler.setLevel(logging.INFO)
+handler.setFormatter(colorlog.ColoredFormatter('%(yellow)s%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+logger.addHandler(handler)
 
 
 
