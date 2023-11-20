@@ -26,7 +26,7 @@ GoIT, Python WEB, Homework number 12. FastAPI. PostgreSQL. Docker. REST API. ORM
 
 1.5. Реалізуйте механізм кешування за допомогою бази даних Redis. Виконайте кешування поточного користувача під час авторизації;
 
-1.6. Реалізуйте механізм скидання паролю для застосунку REST API;
+1.6. Реалізуйте механізм скидання пароля для застосунку REST API;
 
 ## Друга частина
 
@@ -34,18 +34,18 @@ GoIT, Python WEB, Homework number 12. FastAPI. PostgreSQL. Docker. REST API. ORM
 
 ## Завдання
 
-2.1. Реалізуйте механізм скидання паролю для зареєстрованого користувача;
+2.1. Реалізуйте механізм скидання пароля для зареєстрованого користувача;
 
 2.2. Усі змінні середовища повинні зберігатися у файлі .env та використовуватися у файлі settings.py
 
 
 
 
-# Результати виконання завдвнь
+# Результати виконання завдань
 
 ## Встановлення та запуск
-### Підготувати змнні оточення .env
-На оcyові приклаів у теці [doc\dot-env-example](doc\dot-env-example) стоврити файли з Вашими індвідуальними данними:
+### Підготувати зміні оточення .env
+На основі прикладів у теці [doc\dot-env-example](doc\dot-env-example) створити файли з Вашими індивідуальними даними:
 - .env  (визначає APP_ENV що визначає поточний робочий файл є prod, dev)
 - .env-dev (Налаштування для dev)
 - .env-prod (Налаштування для prod)
@@ -67,7 +67,7 @@ docker-compose --env-file .env-prod up -d
 #### Docker Hub url: https://hub.docker.com/r/lexxai/web_hw13
 
 ### Режим dev
-#### Бази данних Docker compose
+#### Бази даних Docker compose
 Виконати скрипт:
 ```
 cd .\scripts
@@ -105,7 +105,7 @@ FastAPI - Swagger UI
 JavaScript easy client
 ![](doc/index-03.png)
 
-## Етапи виконнаня 
+## Етапи виконання 
 
 ## 1.1. Реалізуйте механізм верифікації електронної пошти зареєстрованого користувача
 
@@ -115,13 +115,13 @@ JavaScript easy client
 Спроба зайти, без підтвердження пошти
 ![](doc/auth-emailconf-05.png)
 
-Лист підвердження
+Лист підтвердження
 ![](doc/auth-emailconf-02.png)
 
-Підверження за кліком на посилалання з листа
+Підтвердження за клац на посилання з листа
 ![](doc/auth-emailconf-03.png)
 
-Зміна у базі данних
+Зміна у базі даних
 ![](doc/auth-emailconf-04.png)
 
 Спроба зайти, після підтвердження пошти
@@ -143,19 +143,19 @@ seed script
 
 
 ## 1.3. CORS
-CORS ORGIGIN ALLOW http://localhost:3001
+CORS ORIGIN ALLOW http://localhost:3001
 ![](doc/cors-03.png)
 
-CORS ORGIGIN DENY FOR http://localhost:3002
+CORS ORIGIN DENY FOR http://localhost:3002
 ![](doc/cors-01.png)
 
-CORS ORGIGIN DENY FOR http://localhost:3002
+CORS ORIGIN DENY FOR http://localhost:3002
 ![](doc/cors-02.png)
 
-CORS ORGIGIN ALLOW http://localhost:3002
+CORS ORIGIN ALLOW http://localhost:3002
 ![](doc/cors-04.png)
 
-CORS ORGIGIN ALLOWED FOR http://localhost:3002
+CORS ORIGIN ALLOWED FOR http://localhost:3002
 ![](doc/cors-05.png)
 
 
@@ -172,7 +172,6 @@ Download link of avatar from Cloudinary
 Updated link of avatar from Cloudinary on user profile
 ![](doc/avatar-04.png)
 
-
 ## 1.5. Механізм кешування за допомогою бази даних Redis. Кешування поточного користувача під час авторизації.
 ![](doc/user-redis-01.png)
 
@@ -180,10 +179,9 @@ Updated link of avatar from Cloudinary on user profile
 
 ## 2. Django із домашнього завдання 10
 
-Проєкт виконнано за цим посиланням:
+Проєкт виконано за цим посиланням:
 
 https://github.com/lexxai/goit_python_web_hw_10/tree/addon-hw13
 
-(prepend) Django - https://github.com/lexxai/goit_python_web_django_lect_02_notes
-
+(prepend) Django - https://github.com/lexxai/goit_python_web_django_lect_02_notes/tree/reset_password
 
