@@ -143,3 +143,13 @@ CORS ORGIGIN ALLOWED FOR http://localhost:3002
 ## 1.4. Avatar Cloudinary
 
 
+
+
+
+## 2. Django із домашнього завдання 10
+
+Проєкт виконнано за цим посиланням:
+
+https://github.com/lexxai/goit_python_web_hw_10/tree/addon-hw13
+
+
