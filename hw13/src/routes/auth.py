@@ -136,17 +136,17 @@ async def get_current_user(
     )
     user = None
     new_access_token = None
-    print(f"{access_token=}, {refresh_token=}, {token=}")
+    logger.info(f"{access_token=}, {refresh_token=}, {token=}")
     if not token:
-        print("used cookie access_token")
+        logger.info("used cookie access_token")
         token = access_token
     if token:
         user = await repository_auth.a_get_current_user(token, db)
         if not user and token != access_token:
             user = await repository_auth.a_get_current_user(access_token, db)
         if not user and refresh_token:
-            result = await refresh_access_token(refresh_token)
-            print(f"refresh_access_token  {result=}")
+            result = auth_service.refresh_access_token(refresh_token)
+            logger.info(f"refresh_access_token  {result=}")
             if result:
                 new_access_token = result.get("access_token")
                 email = result.get("email")
@@ -167,12 +167,10 @@ async def get_current_user(
     return user
 
 
-
 @router.get("/secret")
 async def read_item(current_user: User = Depends(get_current_user)):
     auth_result = {"email": current_user.email}
     return {"message": "secret router", "owner": auth_result}
-
 
 
 async def refresh_access_token(refresh_token: str) -> dict[str, Any] | None:
@@ -195,11 +193,11 @@ async def refresh_token(
     db: Session = Depends(get_db),
 ):
     token: str = credentials.credentials
-    print(f"refresh_token {token=}")
+    logger.info(f"refresh_token {token=}")
     if not token and refresh_token:
         token = refresh_token
     email = auth_service.decode_refresh_token(token)
-    print(f"refresh_token {email=}")
+    logger.info(f"refresh_token {email=}")
     user: User | None = await repository_users.get_user_by_email(email, db)
     if user and user.refresh_token != token:  # type: ignore
         await repository_users.update_user_refresh_token(user, None, db)
@@ -211,7 +209,6 @@ async def refresh_token(
                 "set-cookie": response.headers.get("set-cookie", ""),
             },
         )
-
     new_access_token, expire_access_token = auth_service.create_access_token(data={"sub": email})
     new_refresh_token, expire_refresh_token = auth_service.create_refresh_token(data={"sub": email})
     await repository_users.update_user_refresh_token(user, new_refresh_token, db)
