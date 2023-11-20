@@ -44,6 +44,12 @@ GoIT, Python WEB, Homework number 12. FastAPI. PostgreSQL. Docker. REST API. ORM
 # Результати виконання завдвнь
 
 ## Встановлення та запуск
+### Підготувати змнні оточення .env
+На оcyові приклаів у теці [doc\dot-env-example](doc\dot-env-example) стоврити файли з Вашими індвідуальними данними:
+- .env  (визначає APP_ENV що визначає поточний робочий файл є prod, dev)
+- .env-dev (Налаштування для dev)
+- .env-prod (Налаштування для prod)
+
 ### Бази данних Docker compose
 Виконати скрипт:
 ```
@@ -73,6 +79,7 @@ uvicorn main:app --reload --port 9000
 cd .\hw13
 python .\main.py
 ```
+### Відкрити сторінку браузера http://localhost:9000
 
 ## 1.1. Реалізуйте механізм верифікації електронної пошти зареєстрованого користувача
 
