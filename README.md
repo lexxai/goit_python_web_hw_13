@@ -154,6 +154,8 @@ Updated link of avatar from Cloudinary on user profile
 ![](doc/avatar-04.png)
 
 
+## 1.5. Механізм кешування за допомогою бази даних Redis. Кешування поточного користувача під час авторизації.
+![](doc/user-redis-01.png)
 
 
 
