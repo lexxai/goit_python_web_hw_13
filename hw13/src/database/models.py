@@ -34,6 +34,7 @@ class User(Base):
     refresh_token: str | Column[str] | None = Column(String(255), nullable=True)
     avatar: str | Column[str] | None = Column(String(255), nullable=True)
     role: Enum | Column[Enum] = Column("roles", Enum(Role), default=Role.user)
+    confirmed: bool | Column[bool] = Column(Boolean, default=False)
     
     def __str__(self):
         return f"id: {self.id}, email: {self.email}, username: {self.username}"
