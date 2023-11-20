@@ -141,6 +141,17 @@ CORS ORGIGIN ALLOWED FOR http://localhost:3002
 
 
 ## 1.4. Avatar Cloudinary
+Default Gravatar link
+![](doc/avatar-01.png)
+
+Upload new avatar to Cloudinary
+![](doc/avatar-02.png)
+
+Download link of avatar from Cloudinary
+![](doc/avatar-03.png)
+
+Updated link of avatar from Cloudinary on user profile
+![](doc/avatar-04.png)
 
 
 
