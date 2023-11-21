@@ -1,5 +1,5 @@
 # APP_ENV=dev
-
+APP_MODE=dev
 APP_NAME="cats_dev"
 APP_HOST="0.0.0.0"
 APP_PORT=9000

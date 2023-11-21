@@ -57,3 +57,6 @@ class Contact(Base):
     )
     user = relationship("User", backref="contacts")
     # , cascade="all, delete-orphan"
+
+    def __str__(self):
+        return f"id: {self.id}, email: {self.email}, username: {self.first_name} {self.last_name}, birthday: {self.birthday}"
