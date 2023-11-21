@@ -13,7 +13,6 @@ logger = logging.getLogger(f"{settings.app_name}.{__name__}")
 
 redis_conn = redis.Redis(host=settings.redis_host, port=int(settings.redis_port), db=0)
 
-
 async def get_cache_user_by_email(email: str) -> User | None:
     if email:
         try:

@@ -12,13 +12,16 @@ from src.shemas.auth import AccessTokenRefreshResponse
 
 
 class Auth(AuthToken):
-    auth_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
-    auth_response_model = OAuth2PasswordRequestForm
-    token_response_model = AccessTokenRefreshResponse
+    auth_scheme = None  # OAuth2PasswordBearer(tokenUrl="/api/auth/login")
+    auth_response_model = None  #OAuth2PasswordRequestForm
+    token_response_model = None  #AccessTokenRefreshResponse
 
     # constructor
-    def __init__(self, secret_key: str, algorithm: str | None = None) -> None:
+    def __init__(self, secret_key: str, algorithm: str | None = None, token_url: str = "/api/auth/login") -> None:
         assert secret_key, "MISSED SECRET_KEY"
+        self.auth_scheme = OAuth2PasswordBearer(tokenUrl=token_url)
+        self.auth_response_model = OAuth2PasswordRequestForm
+        self.token_response_model = AccessTokenRefreshResponse
         super().__init__(secret_key=secret_key, algorithm=algorithm)
 
     # define a function to generate a new refresh token
@@ -91,4 +94,6 @@ class Auth(AuthToken):
         return None
 
 
-auth_service = Auth(secret_key=settings.token_secret_key, algorithm=settings.token_algorithm)
+auth_service = Auth(
+    secret_key=settings.token_secret_key, algorithm=settings.token_algorithm, token_url="/api/auth/login"
+)
