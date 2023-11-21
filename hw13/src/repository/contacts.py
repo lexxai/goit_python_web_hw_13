@@ -1,5 +1,5 @@
 from datetime import date, timedelta
-from sqlalchemy import text, extract, desc
+from sqlalchemy import select, text, extract, desc
 
 from sqlalchemy.orm import Session
 
@@ -101,7 +101,11 @@ async def search_birthday(param: dict, user_id: int, db: Session):
     list_month = (date_now_month,date_now_month+1)
     #query = db.query(Contact).filter_by(user_id=user_id).filter_by(birthday__month=12)
     #query = db.query(Contact).filter_by(user_id=user_id).filter(text(f"EXTRACT(MONTH FROM contacts.birthday) IN ({date_now_month},{date_now_month+1})"))
-    query = db.query(Contact).filter(Contact.user_id == user_id, extract("MONTH", Contact.birthday).in_(list_month)) # type: ignore
+    # query = db.query(Contact).filter(Contact.user_id == user_id, extract("MONTH", Contact.birthday).in_(list_month)) # type: ignore
+    sel_q = select(Contact)
+    query = db.execute(sel_q)
+
+    query(Contact).filter(Contact.user_id == user_id, extract("MONTH", Contact.birthday).in_(list_month)) # type: ignore
     for contact in query:
         birthday: date | None = contact.birthday  # type: ignore
         if birthday is not None:

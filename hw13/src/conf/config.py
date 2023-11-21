@@ -13,6 +13,7 @@ APP_ENV = environ.get("APP_ENV")
 
 
 class Settings(BaseSettings):
+    app_mode: str = "prod"
     app_name: str = "contacts"
     app_host: str = "0.0.0.0"
     app_port: int = 9000
