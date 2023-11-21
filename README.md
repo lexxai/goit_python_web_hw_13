@@ -185,3 +185,19 @@ https://github.com/lexxai/goit_python_web_hw_10/tree/addon-hw13
 
 (prepend) Django - https://github.com/lexxai/goit_python_web_django_lect_02_notes/tree/reset_password
 
+
+## 2.1 Django HW10
+### PASSWORD RESET
+![](doc/hw10/password-reset-06.png)
+
+![](doc/hw10/password-reset-05.png)
+
+![](doc/hw10/password-reset-01.png)
+
+![](doc/hw10/password-reset-02.png)
+
+![](doc/hw10/password-reset-03.png)
+
+![](doc/hw10/password-reset-04.png)
+
+
