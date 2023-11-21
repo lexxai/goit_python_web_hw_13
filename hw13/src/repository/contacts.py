@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+from typing import List
 from sqlalchemy import select, text, extract, desc
 
 from sqlalchemy.orm import Session
@@ -85,28 +86,30 @@ def date_replace_year(d: date, year: int) -> date:
     except ValueError as err:
         print("date_replace_year b:", d, err)
         d = d + timedelta(days=1)  # 29.02.1988 -> 01.03.1988
-        d = d.replace(year=year)   # 01.03.1988 -> 01.03.2023
+        d = d.replace(year=year)  # 01.03.1988 -> 01.03.2023
         print("date_replace_year a:", d)
     return d
 
+
 # SELECT * FROM public.contacts where user_id = 6 and EXTRACT(MONTH FROM contacts.birthday) IN (1,2,3);
 
-async def search_birthday(param: dict, user_id: int, db: Session):
+
+async def search_birthday(param: dict, user_id: int, db: Session) -> List[Contact]:
     days: int = int(param.get("days", 7)) + 1
-    # date_now = date.today()
-    date_now = date(2023,2,25)
+    date_now = date.today()
+    # date_now = date(2023, 2, 25)
     date_now_year = date_now.year
     date_now_month = date_now.month
     contacts = []
-    list_month = (date_now_month,date_now_month+1)
-    #query = db.query(Contact).filter_by(user_id=user_id).filter_by(birthday__month=12)
-    #query = db.query(Contact).filter_by(user_id=user_id).filter(text(f"EXTRACT(MONTH FROM contacts.birthday) IN ({date_now_month},{date_now_month+1})"))
+    list_month = (date_now_month, date_now_month + 1)
+    # query = db.query(Contact).filter_by(user_id=user_id).filter_by(birthday__month=12)
+    # query = db.query(Contact).filter_by(user_id=user_id).filter(text(f"EXTRACT(MONTH FROM contacts.birthday) IN ({date_now_month},{date_now_month+1})"))
     # query = db.query(Contact).filter(Contact.user_id == user_id, extract("MONTH", Contact.birthday).in_(list_month)) # type: ignore
-    sel_q = select(Contact)
-    query = db.execute(sel_q)
-
-    query(Contact).filter(Contact.user_id == user_id, extract("MONTH", Contact.birthday).in_(list_month)) # type: ignore
-    for contact in query:
+    # query(Contact).filter(Contact.user_id == user_id, extract("MONTH", Contact.birthday).in_(list_month)) # type: ignore
+    # v2.0 select style
+    query = select(Contact).where(Contact.user_id == user_id, extract("MONTH", Contact.birthday).in_(list_month))  # type: ignore
+    contacts_q = db.execute(query).scalars()
+    for contact in contacts_q:
         birthday: date | None = contact.birthday  # type: ignore
         if birthday is not None:
             bd = date_replace_year(birthday, date_now_year)
@@ -114,6 +117,7 @@ async def search_birthday(param: dict, user_id: int, db: Session):
                 bd = date_replace_year(birthday, date_now_year + 1)
             diff_bd = bd - date_now
             if diff_bd.days <= days:
+                print(contact)
                 contacts.append(contact)
     skip = int(param.get("skip", 0))
     limit = int(param.get("limit", 0))
