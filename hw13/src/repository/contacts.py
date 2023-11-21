@@ -6,7 +6,7 @@ from src.shemas.contact import ContactFavoriteModel, ContactModel
 from src.database.models import Contact
 
 
-async def get_contacts(db: Session, user_id: int,  skip: int, limit: int, favorite: bool|None = None):
+async def get_contacts(db: Session, user_id: int, skip: int, limit: int, favorite: bool | None = None):
     query = db.query(Contact).filter_by(user_id=user_id)
     if favorite is not None:
         query = query.filter_by(user_id=user_id)
@@ -71,18 +71,38 @@ async def search_contacts(param: dict, user_id: int, db: Session):
     if first_name:
         query = query.filter(Contact.first_name.ilike(f"%{first_name}%"))
     if last_name:
-        query = query.filter(Contact.last_name.ilike(f"%{last_name}%"))   
+        query = query.filter(Contact.last_name.ilike(f"%{last_name}%"))
     if email:
-        query = query.filter(Contact.email.ilike(f"%{email}%"))   
+        query = query.filter(Contact.email.ilike(f"%{email}%"))
     contacts = query.offset(param.get("skip")).limit(param.get("limit"))
     return contacts
+
+
+def date_replace_year(d: date, year: int) -> date:
+    try:
+        d = d.replace(year=year)  # 29.02.1988
+    except:
+        d = d - timedelta(days=1)  # 28.02.1988
+        d = d.replace(year=year)  #  28.02.2023
+        d = d + timedelta(days=1)  #  01.03.2023
+    return d
 
 
 async def search_birthday(param: dict, user_id: int, db: Session):
-    days:int = int(param.get("days", 7)) + 1
-    filter_afetr = date.today()
-    filter_before = date.today() + timedelta(days = days)
-    query = db.query(Contact).filter_by(user_id=user_id)
-    query = query.filter(Contact.birthday > filter_afetr, Contact.birthday <= filter_before)
-    contacts = query.offset(param.get("skip")).limit(param.get("limit"))
-    return contacts
+    days: int = int(param.get("days", 7)) + 1
+    date_now = date.today()
+    date_now_year = date_now.year
+    contacts = []
+    query = db.query(Contact).filter_by(user_id=user_id).all()
+    for contact in query:
+        birthday: date | None = contact.birthday  # type: ignore
+        if birthday is not None:
+            bd = date_replace_year(birthday, date_now_year)
+            if bd < date_now:
+                bd = date_replace_year(birthday, date_now_year + 1)
+            diff_bd = bd - date_now
+            if diff_bd.days <= days:
+                contacts.append(contact)
+    skip = int(param.get("skip", 0))
+    limit = int(param.get("limit", 0))
+    return contacts[skip : skip + limit]
