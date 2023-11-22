@@ -11,7 +11,8 @@ SQLALCHEMY_DATABASE_URL = URI
 
 assert SQLALCHEMY_DATABASE_URL is not None, "SQLALCHEMY_DATABASE_URL UNDEFINED"
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)
+engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=(settings.app_mode == "dev"))
+
 
 DBSession = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

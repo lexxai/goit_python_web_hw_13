@@ -21,9 +21,9 @@ from src.database.db import get_db
 from src.routes import contacts, auth, users
 
 logger = logging.getLogger(f"{settings.app_name}")
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG if settings.app_mode == "dev" else logging.INFO)
 handler = colorlog.StreamHandler()
-handler.setLevel(logging.INFO)
+handler.setLevel(logging.DEBUG if settings.app_mode == "dev" else logging.INFO)
 handler.setFormatter(colorlog.ColoredFormatter("%(yellow)s%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
 logger.addHandler(handler)
 
